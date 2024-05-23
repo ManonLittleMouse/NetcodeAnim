@@ -38,6 +38,9 @@ class Client():
                 self.frame = t
                 self.networks.append((t,self.y_input ))
 
-    def update_network(self, server_y) :
+    def update_network(self, server) :
         for n in self.networks: 
-            n = (n[0], n[1] + 1)
+            if n[1] <= server.y + server.height//2 and n[0] < server.frame  :
+                self.networks.remove(n)
+            else: 
+                n = (n[0], n[1] + 1)
