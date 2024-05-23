@@ -1,9 +1,9 @@
 import pygame
 
 class Background(): 
-    def __init__(self, screen):
+    def __init__(self, screen, speed):
         self.screen = screen
-        self.move = -1
+        self.move = -speed
         self.width = screen.get_width()
         self.height = screen.get_height()
         self.background_color = "#ECF8F6"
@@ -16,8 +16,7 @@ class Background():
         self.font = pygame.font.SysFont("comicsans", 20)
         for i in range(50, self.width, self.pas):
             rect = pygame.Rect(i, self.decalage, self.size, self.height )
-            text = self.font.render(str(self.id_timestamp), 1, self.timestamp_color )
-            self.timestamp.append((rect,text))
+            self.timestamp.append((rect, self.id_timestamp))
             self.id_timestamp += 1
 
 
@@ -26,7 +25,7 @@ class Background():
         for i in range (len(self.timestamp)) :
             rect = self.timestamp[i][0]
             pygame.draw.rect(self.screen, self.timestamp_color, rect, 40)
-            text =self.timestamp[i][1]
+            text = self.font.render(str(self.timestamp[i][1]), 1, self.timestamp_color )
             x = rect.x - text.get_width()//2
             y = rect.y + 5 - self.decalage
             self.screen.blit(text, (x,y))
@@ -39,9 +38,8 @@ class Background():
             self.timestamp.pop(0)
 
             new_rect = pygame.Rect(self.timestamp[-1][0].x + self.pas, self.decalage, self.size, self.height )
-            new_text = self.font.render(str(self.id_timestamp), 1, self.timestamp_color )
-
-            self.timestamp.append((new_rect, new_text))
+        
+            self.timestamp.append((new_rect, self.id_timestamp))
             self.id_timestamp += 1
 
         
