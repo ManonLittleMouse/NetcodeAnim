@@ -1,7 +1,7 @@
 import pygame
 
 class Background(): 
-    def __init__(self, screen, speed):
+    def __init__(self, screen, ratio, speed):
         self.screen = screen
         self.move = -speed
         self.width = screen.get_width()
@@ -9,7 +9,7 @@ class Background():
         self.background_color = "#ECF8F6"
         self.timestamp_color = pygame.Color("#226D68", alpha=20)
         self.timestamp = []
-        self.pas = 75
+        self.pas = ratio
         self.size = 2
         self.id_timestamp = 0
         self.decalage = 20
@@ -41,5 +41,3 @@ class Background():
         
             self.timestamp.append((new_rect, self.id_timestamp))
             self.id_timestamp += 1
-
-        
